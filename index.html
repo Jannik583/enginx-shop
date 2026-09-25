@@ -1059,9 +1059,8 @@ console.log("ENGINX Produkte geladen:", products);
     script.id = callbackName;
 
     script.src =
-        "https://script.google.com/macros/s/AKfycbzOCmurVgCq8NG3Vn0XqXB1Bo1pebR7Z31dsFHA-pQ0HnyP4AD65D_974_Y5ax11udlGg/exec" +
-        "?action=getProducts" +
-        "&callback=" + callbackName;
+    "https://script.google.com/macros/s/AKfycbzOCmurVgCq8NG3Vn0XqXB1Bo1pebR7Z31dsFHA-pQ0HnyP4AD65D_974_Y5ax11udlGg/exec?action=getProducts&callback=" +
+    callbackName;
 
     script.onerror = function() {
 
