@@ -1028,13 +1028,16 @@ footer{
 let products = [];
 
 function loadProducts() {
-
+console.log("ENGINX Produkte:", products);
+    
     const callbackName =
         "enginxProducts_" + Date.now();
 
     window[callbackName] = function(data) {
 
         products = data || [];
+
+console.log("ENGINX Produkte geladen:", products);
 
         delete window[callbackName];
 
