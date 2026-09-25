@@ -56,6 +56,7 @@ a{
     text-decoration:none;
 }
 
+
 /* HEADER */
 
 header{
@@ -125,6 +126,7 @@ header{
     font-size:12px;
     font-weight:800;
 }
+
 
 /* HERO */
 
@@ -226,6 +228,7 @@ header{
     letter-spacing:8px;
 }
 
+
 /* SECTION */
 
 .section{
@@ -251,6 +254,7 @@ header{
     color:var(--muted);
     margin-top:8px;
 }
+
 
 /* SEARCH */
 
@@ -281,6 +285,7 @@ header{
     border-radius:14px;
     padding:0 14px;
 }
+
 
 /* PRODUCTS */
 
@@ -314,9 +319,11 @@ header{
     overflow:hidden;
 }
 
-.productEmoji{
-    font-size:100px;
-    filter:drop-shadow(0 20px 30px rgba(0,0,0,.45));
+.productImage img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
 }
 
 .productBody{
@@ -357,6 +364,7 @@ header{
     font-weight:800;
 }
 
+
 /* INFO */
 
 .infoGrid{
@@ -387,6 +395,7 @@ header{
     font-size:14px;
 }
 
+
 /* FOOTER */
 
 footer{
@@ -415,6 +424,7 @@ footer{
     background:none;
     color:var(--muted);
 }
+
 
 /* MODAL */
 
@@ -456,10 +466,14 @@ footer{
         #0a0f15;
     display:grid;
     place-items:center;
+    overflow:hidden;
 }
 
-.modalEmoji{
-    font-size:150px;
+.modalImage img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    display:block;
 }
 
 .modalContent{
@@ -511,6 +525,7 @@ footer{
     margin:25px 0;
 }
 
+
 /* CART */
 
 .cartPanel{
@@ -549,7 +564,13 @@ footer{
     background:#151c25;
     display:grid;
     place-items:center;
-    font-size:27px;
+    overflow:hidden;
+}
+
+.cartThumb img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
 }
 
 .cartItemName{
@@ -588,6 +609,7 @@ footer{
     text-align:center;
     color:var(--muted);
 }
+
 
 /* ORDER */
 
@@ -641,6 +663,7 @@ footer{
     line-height:1.5;
 }
 
+
 /* LEGAL */
 
 .legal{
@@ -662,9 +685,11 @@ footer{
     font-size:14px;
 }
 
+
 /* RESPONSIVE */
 
 @media(max-width:900px){
+
     .products{
         grid-template-columns:repeat(2,1fr);
     }
@@ -680,9 +705,11 @@ footer{
     .infoGrid{
         grid-template-columns:1fr;
     }
+
 }
 
 @media(max-width:650px){
+
     .navlinks{
         display:none;
     }
@@ -719,13 +746,10 @@ footer{
         min-height:230px;
     }
 
-    .modalEmoji{
-        font-size:100px;
-    }
-
     .footerInner{
         flex-direction:column;
     }
+
 }
 </style>
 </head>
@@ -733,8 +757,12 @@ footer{
 <body>
 
 <header>
+
     <nav class="nav">
-        <a href="#" class="logo">ENGIN<span>X</span></a>
+
+        <a href="#" class="logo">
+            ENGIN<span>X</span>
+        </a>
 
         <div class="navlinks">
             <a href="#shop">Shop</a>
@@ -745,14 +773,21 @@ footer{
             🛒 Warenkorb
             <span class="cartCount" id="cartCount">0</span>
         </button>
+
     </nav>
+
 </header>
+
 
 <main>
 
 <section class="hero">
+
     <div>
-        <div class="badge">3D PRINTED • MADE WITH A1</div>
+
+        <div class="badge">
+            3D PRINTED • MADE WITH A1
+        </div>
 
         <h1>
             Dinge, die<br>
@@ -766,32 +801,56 @@ footer{
         </p>
 
         <div class="heroButtons">
-            <button class="primary" onclick="document.getElementById('shop').scrollIntoView()">
+
+            <button
+                class="primary"
+                onclick="document.getElementById('shop').scrollIntoView()"
+            >
                 Shop entdecken
             </button>
 
-            <button class="secondary" onclick="document.getElementById('about').scrollIntoView()">
+            <button
+                class="secondary"
+                onclick="document.getElementById('about').scrollIntoView()"
+            >
                 Mehr über ENGINX
             </button>
+
         </div>
+
     </div>
 
+
     <div class="heroVisual">
-        <div class="heroLogo">ENGINX</div>
+
+        <div class="heroLogo">
+            ENGINX
+        </div>
+
     </div>
+
 </section>
 
 
 <section class="section" id="shop">
 
     <div class="sectionHead">
+
         <div>
+
             <h2>Shop</h2>
-            <p>Entdecke unsere aktuellen 3D-Druck-Produkte.</p>
+
+            <p>
+                Entdecke unsere aktuellen 3D-Druck-Produkte.
+            </p>
+
         </div>
+
     </div>
 
+
     <div class="shopTools">
+
         <input
             class="search"
             id="search"
@@ -800,14 +859,26 @@ footer{
             oninput="renderProducts()"
         >
 
-        <select class="category" id="category" onchange="renderProducts()">
-            <option value="all">Alle Produkte</option>
-            <option value="flexi">Flexi</option>
-            <option value="tier">Tiere</option>
+
+        <select
+            class="category"
+            id="category"
+            onchange="renderProducts()"
+        >
+
+            <option value="all">
+                Alle Produkte
+            </option>
+
         </select>
+
     </div>
 
-    <div class="products" id="products"></div>
+
+    <div
+        class="products"
+        id="products"
+    ></div>
 
 </section>
 
@@ -815,40 +886,76 @@ footer{
 <section class="section" id="about">
 
     <div class="sectionHead">
+
         <div>
+
             <h2>Warum ENGINX?</h2>
-            <p>3D-Druck ohne unnötigen Schnickschnack.</p>
+
+            <p>
+                3D-Druck ohne unnötigen Schnickschnack.
+            </p>
+
         </div>
+
     </div>
+
 
     <div class="infoGrid">
 
+
         <div class="infoCard">
-            <div class="infoIcon">⚙️</div>
-            <h3>3D gedruckt</h3>
+
+            <div class="infoIcon">
+                ⚙️
+            </div>
+
+            <h3>
+                3D gedruckt
+            </h3>
+
             <p>
                 Jedes Produkt wird einzeln mit einem modernen
                 FDM-3D-Drucker gefertigt.
             </p>
+
         </div>
 
+
         <div class="infoCard">
-            <div class="infoIcon">🎨</div>
-            <h3>Deine Farbe</h3>
+
+            <div class="infoIcon">
+                🎨
+            </div>
+
+            <h3>
+                Deine Farbe
+            </h3>
+
             <p>
                 Viele Produkte können in verschiedenen Farben
                 gefertigt werden.
             </p>
+
         </div>
 
+
         <div class="infoCard">
-            <div class="infoIcon">📦</div>
-            <h3>Auf Bestellung</h3>
+
+            <div class="infoIcon">
+                📦
+            </div>
+
+            <h3>
+                Auf Bestellung
+            </h3>
+
             <p>
                 Die Produkte werden nicht einfach irgendwo
                 aus einem Lager verschickt, sondern auf Bestellung gefertigt.
             </p>
+
         </div>
+
 
     </div>
 
@@ -858,6 +965,7 @@ footer{
 
 
 <footer>
+
     <div class="footerInner">
 
         <div>
@@ -865,37 +973,77 @@ footer{
         </div>
 
         <div class="footerLinks">
-            <button onclick="openLegal('impressum')">Impressum</button>
-            <button onclick="openLegal('datenschutz')">Datenschutz</button>
+
+            <button onclick="openLegal('impressum')">
+                Impressum
+            </button>
+
+            <button onclick="openLegal('datenschutz')">
+                Datenschutz
+            </button>
+
         </div>
 
     </div>
+
 </footer>
 
 
 <!-- PRODUCT MODAL -->
 
-<div class="overlay" id="productOverlay" onclick="outsideClose(event,'productOverlay')">
+<div
+    class="overlay"
+    id="productOverlay"
+    onclick="outsideClose(event,'productOverlay')"
+>
 
     <div class="modal">
 
         <div class="modalGrid">
 
+
             <div class="modalImage">
-                <div class="modalEmoji" id="modalEmoji">🐍</div>
+
+                <img
+                    id="modalProductImage"
+                    src=""
+                    alt="Produktbild"
+                >
+
             </div>
+
 
             <div class="modalContent">
 
-                <button class="close" onclick="closeModal('productOverlay')">×</button>
+                <button
+                    class="close"
+                    onclick="closeModal('productOverlay')"
+                >
+                    ×
+                </button>
 
-                <h2 id="modalName">Produkt</h2>
 
-                <p class="modalDescription" id="modalDescription"></p>
+                <h2 id="modalName">
+                    Produkt
+                </h2>
 
-                <label class="optionLabel">Farbe</label>
 
-                <select class="colorSelect" id="modalColor">
+                <p
+                    class="modalDescription"
+                    id="modalDescription"
+                ></p>
+
+
+                <label class="optionLabel">
+                    Farbe
+                </label>
+
+
+                <select
+                    class="colorSelect"
+                    id="modalColor"
+                >
+
                     <option>Schwarz</option>
                     <option>Weiß</option>
                     <option>Grau</option>
@@ -903,9 +1051,14 @@ footer{
                     <option>Grün</option>
                     <option>Rot</option>
                     <option>Lila</option>
+
                 </select>
 
-                <label class="optionLabel">Menge</label>
+
+                <label class="optionLabel">
+                    Menge
+                </label>
+
 
                 <input
                     class="quantity"
@@ -916,9 +1069,20 @@ footer{
                     value="1"
                 >
 
-                <div class="modalPrice" id="modalPrice">7,99 €</div>
 
-                <button class="primary" style="width:100%" onclick="addToCart()">
+                <div
+                    class="modalPrice"
+                    id="modalPrice"
+                >
+                    0,00 €
+                </div>
+
+
+                <button
+                    class="primary"
+                    style="width:100%"
+                    onclick="addToCart()"
+                >
                     In den Warenkorb
                 </button>
 
@@ -933,18 +1097,41 @@ footer{
 
 <!-- CART -->
 
-<div class="overlay" id="cartOverlay" onclick="outsideClose(event,'cartOverlay')">
+<div
+    class="overlay"
+    id="cartOverlay"
+    onclick="outsideClose(event,'cartOverlay')"
+>
 
     <div class="cartPanel">
 
+
         <div class="cartHeader">
-            <strong>Dein Warenkorb</strong>
-            <button class="close" onclick="closeModal('cartOverlay')">×</button>
+
+            <strong>
+                Dein Warenkorb
+            </strong>
+
+            <button
+                class="close"
+                onclick="closeModal('cartOverlay')"
+            >
+                ×
+            </button>
+
         </div>
 
-        <div class="cartItems" id="cartItems"></div>
 
-        <div class="cartTotal" id="cartTotal"></div>
+        <div
+            class="cartItems"
+            id="cartItems"
+        ></div>
+
+
+        <div
+            class="cartTotal"
+            id="cartTotal"
+        ></div>
 
     </div>
 
@@ -953,44 +1140,99 @@ footer{
 
 <!-- ORDER -->
 
-<div class="overlay" id="orderOverlay">
+<div
+    class="overlay"
+    id="orderOverlay"
+>
 
     <div class="cartPanel">
 
+
         <div class="cartHeader">
-            <strong>Bestellanfrage</strong>
-            <button class="close" onclick="closeModal('orderOverlay')">×</button>
+
+            <strong>
+                Bestellanfrage
+            </strong>
+
+            <button
+                class="close"
+                onclick="closeModal('orderOverlay')"
+            >
+                ×
+            </button>
+
         </div>
+
 
         <div class="form">
 
-            <h3>Fast geschafft.</h3>
+            <h3>
+                Fast geschafft.
+            </h3>
+
 
             <p>
                 Fülle die folgenden Angaben aus. Deine Bestellung wird
                 anschließend als Anfrage vorbereitet.
             </p>
 
-            <label>Name</label>
-            <input id="orderName" placeholder="Dein Name">
 
-            <label>E-Mail</label>
-            <input id="orderEmail" type="email" placeholder="deine@email.de">
+            <label>
+                Name
+            </label>
 
-            <label>Adresse</label>
-            <input id="orderAddress" placeholder="Straße, Hausnummer, PLZ, Ort">
+            <input
+                id="orderName"
+                placeholder="Dein Name"
+            >
 
-            <label>Nachricht</label>
-            <textarea id="orderMessage" placeholder="Optional"></textarea>
 
-            <button class="primary" style="width:100%;margin-top:20px" onclick="submitOrder()">
+            <label>
+                E-Mail
+            </label>
+
+            <input
+                id="orderEmail"
+                type="email"
+                placeholder="deine@email.de"
+            >
+
+
+            <label>
+                Adresse
+            </label>
+
+            <input
+                id="orderAddress"
+                placeholder="Straße, Hausnummer, PLZ, Ort"
+            >
+
+
+            <label>
+                Nachricht
+            </label>
+
+            <textarea
+                id="orderMessage"
+                placeholder="Optional"
+            ></textarea>
+
+
+            <button
+                class="primary"
+                style="width:100%;margin-top:20px"
+                onclick="submitOrder()"
+            >
                 Bestellanfrage vorbereiten
             </button>
 
+
             <div class="notice">
+
                 Hinweis: Dies ist zunächst eine Bestellanfrage und noch
                 keine automatische Zahlung. Eine echte Online-Zahlung
                 kann später ergänzt werden.
+
             </div>
 
         </div>
@@ -1002,13 +1244,22 @@ footer{
 
 <!-- LEGAL -->
 
-<div class="overlay" id="legalOverlay" onclick="outsideClose(event,'legalOverlay')">
+<div
+    class="overlay"
+    id="legalOverlay"
+    onclick="outsideClose(event,'legalOverlay')"
+>
 
     <div class="modal">
 
         <div class="legal">
 
-            <button class="close" onclick="closeModal('legalOverlay')">×</button>
+            <button
+                class="close"
+                onclick="closeModal('legalOverlay')"
+            >
+                ×
+            </button>
 
             <div id="legalContent"></div>
 
@@ -1021,112 +1272,273 @@ footer{
 
 <script>
 
-/* =========================
+
+/* ========================================
    PRODUKTE
-========================= */
+======================================== */
 
 let products = [];
 
+
+
+/* ========================================
+   APPS SCRIPT PRODUKTE LADEN
+======================================== */
+
 function loadProducts() {
-console.log("ENGINX Produkte:", products);
-    
+
     const callbackName =
         "enginxProducts_" + Date.now();
 
+
     window[callbackName] = function(data) {
 
-        products = data || [];
+        products = Array.isArray(data)
+            ? data
+            : [];
 
-console.log("ENGINX Produkte geladen:", products);
+
+        console.log(
+            "ENGINX Produkte geladen:",
+            products
+        );
+
 
         delete window[callbackName];
+
 
         const script =
             document.getElementById(callbackName);
 
-        if (script) {
+
+        if(script){
             script.remove();
         }
 
+
+        updateCategoryFilter();
+
         renderProducts();
+
         updateCart();
+
     };
+
 
 
     const script =
         document.createElement("script");
 
-    script.id = callbackName;
+
+    script.id =
+        callbackName;
+
 
     script.src =
-    "https://script.google.com/macros/s/AKfycbzOCmurVgCq8NG3Vn0XqXB1Bo1pebR7Z31dsFHA-pQ0HnyP4AD65D_974_Y5ax11udlGg/exec?action=getProducts&callback=" +
-    callbackName;
+        "https://script.google.com/macros/s/AKfycbxmcrb1WqTo9i58SSEgeZ31uVexfpm7AkMJ7DSkSfIRYAqXsmkbnshmgcQHRGB6iiOZiA/exec" +
+        "?action=getProducts" +
+        "&callback=" +
+        callbackName;
 
-    script.onerror = function() {
+
+    script.onerror = function(){
 
         console.error(
             "ENGINX: Produkte konnten nicht geladen werden."
         );
 
+
         delete window[callbackName];
 
+
         script.remove();
-    };
-
-    document.body.appendChild(script);
-}
-    
-let cart = [];
-let currentProduct = null;
-
-const GOOGLE_SHEETS_URL =
-    "https://script.google.com/macros/s/AKfycbx_UYwVVYXUdixRRWBofCKiziKKhFLUIAE_qynvKSemhV4Ca285WNvk99tnz4tRU-LdgQ/exec";
 
 
-/* =========================
-   PRODUKTE ANZEIGEN
-========================= */
+        const container =
+            document.getElementById("products");
 
-function renderProducts(){
-
-    const container = document.getElementById("products");
-
-    const search =
-        document.getElementById("search").value.toLowerCase();
-
-    const category =
-        document.getElementById("category").value;
-
-    const filtered = products.filter(product => {
-
-        const matchesSearch =
-            product.name.toLowerCase().includes(search);
-
-        const matchesCategory =
-            category === "all" ||
-            product.category.includes(category);
-
-        return matchesSearch && matchesCategory;
-
-    });
-
-    container.innerHTML = "";
-
-    if(filtered.length === 0){
 
         container.innerHTML = `
+
             <div style="
                 grid-column:1/-1;
                 padding:40px;
                 text-align:center;
                 color:#8993a3;
             ">
-                Kein Produkt gefunden.
+
+                Produkte konnten nicht geladen werden.
+
             </div>
+
+        `;
+
+    };
+
+
+    document.body.appendChild(script);
+
+}
+
+
+
+/* ========================================
+   KATEGORIEN AUTOMATISCH ERSTELLEN
+======================================== */
+
+function updateCategoryFilter(){
+
+    const select =
+        document.getElementById("category");
+
+
+    const currentValue =
+        select.value;
+
+
+    const categories =
+        [
+            ...new Set(
+                products
+                    .map(product =>
+                        String(product.category || "").trim()
+                    )
+                    .filter(category => category !== "")
+            )
+        ];
+
+
+    select.innerHTML = `
+
+        <option value="all">
+            Alle Produkte
+        </option>
+
+    `;
+
+
+    categories.forEach(category => {
+
+        const option =
+            document.createElement("option");
+
+
+        option.value =
+            category;
+
+
+        option.textContent =
+            category;
+
+
+        select.appendChild(option);
+
+    });
+
+
+    if(
+        categories.includes(currentValue)
+    ){
+
+        select.value =
+            currentValue;
+
+    }
+
+}
+
+
+
+/* ========================================
+   WARENKORB
+======================================== */
+
+let cart = [];
+
+let currentProduct = null;
+
+
+
+const GOOGLE_SHEETS_URL =
+    "https://script.google.com/macros/s/AKfycbx_UYwVVYXUdixRRWBofCKiziKKhFLUIAE_qynvKSemhV4Ca285WNvk99tnz4tRU-LdgQ/exec";
+
+
+
+/* ========================================
+   PRODUKTE ANZEIGEN
+======================================== */
+
+function renderProducts(){
+
+    const container =
+        document.getElementById("products");
+
+
+    const search =
+        document
+            .getElementById("search")
+            .value
+            .toLowerCase()
+            .trim();
+
+
+    const category =
+        document
+            .getElementById("category")
+            .value;
+
+
+    const filtered =
+        products.filter(product => {
+
+
+            const matchesSearch =
+                String(product.name || "")
+                    .toLowerCase()
+                    .includes(search);
+
+
+            const matchesCategory =
+                category === "all" ||
+                String(product.category || "") === category;
+
+
+            return (
+                matchesSearch &&
+                matchesCategory
+            );
+
+        });
+
+
+    container.innerHTML = "";
+
+
+    if(filtered.length === 0){
+
+        container.innerHTML = `
+
+            <div style="
+                grid-column:1/-1;
+                padding:40px;
+                text-align:center;
+                color:#8993a3;
+            ">
+
+                ${
+                    products.length === 0
+                        ? "Noch keine Produkte verfügbar."
+                        : "Kein Produkt gefunden."
+                }
+
+            </div>
+
         `;
 
         return;
+
     }
+
 
     filtered.forEach(product => {
 
@@ -1135,22 +1547,28 @@ function renderProducts(){
             <article class="product">
 
                 <div class="productImage">
-                    <div class="productEmoji">
-                        <img
-    src="${product.image}"
-    alt="${product.name}"
-    style="width:100%;height:100%;object-fit:cover;"
->
-                    </div>
+
+                    <img
+                        src="${escapeHtml(product.image)}"
+                        alt="${escapeHtml(product.name)}"
+                        loading="lazy"
+                        onerror="this.style.display='none';"
+                    >
+
                 </div>
+
 
                 <div class="productBody">
 
-                    <h3>${product.name}</h3>
+                    <h3>
+                        ${escapeHtml(product.name)}
+                    </h3>
+
 
                     <p>
-                        ${product.description}
+                        ${escapeHtml(product.description)}
                     </p>
+
 
                     <div class="productBottom">
 
@@ -1158,9 +1576,10 @@ function renderProducts(){
                             ${formatPrice(product.price)}
                         </div>
 
+
                         <button
                             class="smallButton"
-                            onclick="openProduct(${product.id})"
+                            onclick="openProduct(${Number(product.id)})"
                         >
                             Anschauen
                         </button>
@@ -1178,53 +1597,106 @@ function renderProducts(){
 }
 
 
-/* =========================
+
+/* ========================================
    PRODUKT ÖFFNEN
-========================= */
+======================================== */
 
 function openProduct(id){
 
     currentProduct =
-        products.find(product => product.id === id);
+        products.find(
+            product =>
+                Number(product.id) === Number(id)
+        );
 
-    document.getElementById("modalName").textContent =
+
+    if(!currentProduct){
+        return;
+    }
+
+
+    document
+        .getElementById("modalName")
+        .textContent =
         currentProduct.name;
 
-    document.getElementById("modalEmoji").textContent =
-        currentProduct.emoji;
 
-    document.getElementById("modalDescription").textContent =
+    document
+        .getElementById("modalProductImage")
+        .src =
+        currentProduct.image || "";
+
+
+    document
+        .getElementById("modalProductImage")
+        .alt =
+        currentProduct.name;
+
+
+    document
+        .getElementById("modalDescription")
+        .textContent =
         currentProduct.description;
 
-    document.getElementById("modalPrice").textContent =
+
+    document
+        .getElementById("modalPrice")
+        .textContent =
         formatPrice(currentProduct.price);
 
-    document.getElementById("modalQuantity").value = 1;
 
-    document.getElementById("productOverlay")
-        .classList.add("active");
+    document
+        .getElementById("modalQuantity")
+        .value =
+        1;
+
+
+    document
+        .getElementById("productOverlay")
+        .classList
+        .add("active");
+
 }
 
 
-/* =========================
-   WARENKORB
-========================= */
+
+/* ========================================
+   WARENKORB HINZUFÜGEN
+======================================== */
 
 function addToCart(){
 
+    if(!currentProduct){
+        return;
+    }
+
+
     const color =
-        document.getElementById("modalColor").value;
+        document
+            .getElementById("modalColor")
+            .value;
+
 
     const quantity =
-        Number(document.getElementById("modalQuantity").value);
+        Number(
+            document
+                .getElementById("modalQuantity")
+                .value
+        );
 
-    if(quantity < 1) return;
+
+    if(quantity < 1){
+        return;
+    }
+
 
     const existing =
         cart.find(item =>
             item.id === currentProduct.id &&
             item.color === color
         );
+
 
     if(existing){
 
@@ -1234,101 +1706,170 @@ function addToCart(){
 
         cart.push({
 
-            id:currentProduct.id,
-            name:currentProduct.name,
-            emoji:currentProduct.emoji,
-            price:currentProduct.price,
-            color:color,
-            quantity:quantity
+            id:
+                currentProduct.id,
+
+            name:
+                currentProduct.name,
+
+            image:
+                currentProduct.image,
+
+            price:
+                Number(currentProduct.price),
+
+            color:
+                color,
+
+            quantity:
+                quantity
 
         });
 
     }
 
+
     updateCart();
+
 
     closeModal("productOverlay");
 
+
     openCart();
+
 }
 
+
+
+/* ========================================
+   WARENKORB AKTUALISIEREN
+======================================== */
 
 function updateCart(){
 
     const count =
-        cart.reduce((sum,item) =>
-            sum + item.quantity,0);
+        cart.reduce(
+            (sum,item) =>
+                sum + item.quantity,
+            0
+        );
 
-    document.getElementById("cartCount").textContent =
+
+    document
+        .getElementById("cartCount")
+        .textContent =
         count;
+
 
     renderCart();
 
 }
 
 
+
+/* ========================================
+   WARENKORB ANZEIGEN
+======================================== */
+
 function renderCart(){
 
     const container =
         document.getElementById("cartItems");
 
+
     const totalBox =
         document.getElementById("cartTotal");
+
 
     if(cart.length === 0){
 
         container.innerHTML = `
+
             <div class="empty">
+
                 Dein Warenkorb ist noch leer.
+
             </div>
+
         `;
+
 
         totalBox.innerHTML = "";
 
+
         return;
+
     }
+
 
     container.innerHTML = "";
 
+
     let total = 0;
 
+
     cart.forEach((item,index) => {
+
 
         const itemTotal =
             item.price * item.quantity;
 
+
         total += itemTotal;
+
 
         container.innerHTML += `
 
             <div class="cartItem">
 
+
                 <div class="cartThumb">
-                    ${item.emoji}
+
+                    <img
+                        src="${escapeHtml(item.image || "")}"
+                        alt=""
+                        onerror="this.style.display='none';"
+                    >
+
                 </div>
+
 
                 <div>
 
                     <div class="cartItemName">
-                        ${item.name}
+
+                        ${escapeHtml(item.name)}
+
                     </div>
 
+
                     <div class="cartItemInfo">
-                        ${item.color} · ${item.quantity}×
+
+                        ${escapeHtml(item.color)}
+                        ·
+                        ${item.quantity}×
+
                     </div>
+
 
                     <button
                         class="remove"
                         onclick="removeCartItem(${index})"
                     >
+
                         Entfernen
+
                     </button>
 
                 </div>
 
+
                 <strong>
+
                     ${formatPrice(itemTotal)}
+
                 </strong>
+
 
             </div>
 
@@ -1336,25 +1877,41 @@ function renderCart(){
 
     });
 
+
     totalBox.innerHTML = `
 
         <div class="totalRow">
-            <span>Gesamt</span>
-            <span>${formatPrice(total)}</span>
+
+            <span>
+                Gesamt
+            </span>
+
+            <span>
+                ${formatPrice(total)}
+            </span>
+
         </div>
+
 
         <button
             class="primary"
             style="width:100%"
             onclick="openOrder()"
         >
+
             Bestellanfrage
+
         </button>
 
     `;
 
 }
 
+
+
+/* ========================================
+   WARENKORB ARTIKEL ENTFERNEN
+======================================== */
 
 function removeCartItem(index){
 
@@ -1365,105 +1922,192 @@ function removeCartItem(index){
 }
 
 
-/* =========================
-   BESTELLUNG
-========================= */
+
+/* ========================================
+   BESTELLUNG ÖFFNEN
+======================================== */
 
 function openOrder(){
 
-    if(cart.length === 0) return;
+    if(cart.length === 0){
+        return;
+    }
+
 
     closeModal("cartOverlay");
 
-    document.getElementById("orderOverlay")
-        .classList.add("active");
+
+    document
+        .getElementById("orderOverlay")
+        .classList
+        .add("active");
+
 }
 
+
+
+/* ========================================
+   BESTELLUNG ABSENDEN
+======================================== */
 
 function submitOrder(){
 
     const name =
-        document.getElementById("orderName").value.trim();
+        document
+            .getElementById("orderName")
+            .value
+            .trim();
+
 
     const email =
-        document.getElementById("orderEmail").value.trim();
+        document
+            .getElementById("orderEmail")
+            .value
+            .trim();
+
 
     const address =
-        document.getElementById("orderAddress").value.trim();
+        document
+            .getElementById("orderAddress")
+            .value
+            .trim();
+
 
     const message =
-        document.getElementById("orderMessage").value.trim();
+        document
+            .getElementById("orderMessage")
+            .value
+            .trim();
+
 
     if(!name || !email || !address){
 
-        alert("Bitte fülle Name, E-Mail und Adresse aus.");
+        alert(
+            "Bitte fülle Name, E-Mail und Adresse aus."
+        );
+
         return;
 
     }
 
+
     let productsText = "";
+
     let total = 0;
 
+
     cart.forEach(item => {
+
 
         const itemTotal =
             item.price * item.quantity;
 
+
         total += itemTotal;
+
 
         productsText +=
             `${item.name} | ${item.color} | ${item.quantity}x | ${formatPrice(itemTotal)}\n`;
 
     });
 
+
     const data = {
 
-        name: name,
-        email: email,
-        address: address,
-        products: productsText,
-        total: formatPrice(total),
-        message: message
+        action:
+            "order",
+
+        name:
+            name,
+
+        email:
+            email,
+
+        address:
+            address,
+
+        products:
+            productsText,
+
+        total:
+            formatPrice(total),
+
+        message:
+            message
 
     };
 
-    fetch(GOOGLE_SHEETS_URL, {
 
-        method: "POST",
+    fetch(
+        GOOGLE_SHEETS_URL,
+        {
 
-        body: JSON.stringify(data)
+            method:"POST",
 
-    })
-    .then(response => response.json())
+            body:
+                JSON.stringify(data)
+
+        }
+    )
+
+    .then(response =>
+        response.json()
+    )
+
     .then(result => {
+
 
         if(result.success){
 
             alert(
-                "✅ Bestellung erfolgreich übermittelt!\n\n" +
-                "Vielen Dank für deine Bestellung bei ENGINX."
+                "✅ Bestellanfrage erfolgreich übermittelt!\n\n" +
+                "Vielen Dank für deine Anfrage bei ENGINX."
             );
 
+
             cart = [];
+
+
             updateCart();
 
-            document.getElementById("orderName").value = "";
-            document.getElementById("orderEmail").value = "";
-            document.getElementById("orderAddress").value = "";
-            document.getElementById("orderMessage").value = "";
+
+            document
+                .getElementById("orderName")
+                .value = "";
+
+
+            document
+                .getElementById("orderEmail")
+                .value = "";
+
+
+            document
+                .getElementById("orderAddress")
+                .value = "";
+
+
+            document
+                .getElementById("orderMessage")
+                .value = "";
+
 
             closeModal("orderOverlay");
 
         }else{
 
-            alert("Die Bestellung konnte nicht übermittelt werden.");
+            alert(
+                "Die Bestellung konnte nicht übermittelt werden."
+            );
 
         }
 
     })
+
+
     .catch(error => {
 
         console.error(error);
+
 
         alert(
             "Es ist ein Fehler aufgetreten. " +
@@ -1475,33 +2119,44 @@ function submitOrder(){
 }
 
 
-/* =========================
+
+/* ========================================
    WARENKORB ÖFFNEN
-========================= */
+======================================== */
 
 function openCart(){
 
     renderCart();
 
-    document.getElementById("cartOverlay")
-        .classList.add("active");
+
+    document
+        .getElementById("cartOverlay")
+        .classList
+        .add("active");
+
 }
 
 
-/* =========================
+
+/* ========================================
    LEGAL
-========================= */
+======================================== */
 
 function openLegal(type){
 
     const content =
-        document.getElementById("legalContent");
+        document
+            .getElementById("legalContent");
+
 
     if(type === "impressum"){
 
         content.innerHTML = `
 
-            <h2>Impressum</h2>
+            <h2>
+                Impressum
+            </h2>
+
 
             <p>
                 Diese Angaben müssen vor dem tatsächlichen
@@ -1509,19 +2164,31 @@ function openLegal(type){
                 ergänzt werden.
             </p>
 
-            <h3>Anbieter</h3>
+
+            <h3>
+                Anbieter
+            </h3>
+
 
             <p>
+
                 ENGINX<br>
                 [Vor- und Nachname]<br>
                 [Straße und Hausnummer]<br>
                 [PLZ Ort]
+
             </p>
 
-            <h3>Kontakt</h3>
+
+            <h3>
+                Kontakt
+            </h3>
+
 
             <p>
+
                 E-Mail: [deine E-Mail-Adresse]
+
             </p>
 
         `;
@@ -1530,50 +2197,76 @@ function openLegal(type){
 
         content.innerHTML = `
 
-            <h2>Datenschutz</h2>
+            <h2>
+                Datenschutz
+            </h2>
+
 
             <p>
+
                 Diese Seite verwendet aktuell keine eigene
                 Tracking-Software und speichert keine
                 Kundendaten auf diesem Webserver.
+
             </p>
 
-            <h3>Bestellanfragen</h3>
+
+            <h3>
+                Bestellanfragen
+            </h3>
+
 
             <p>
+
                 Die über das Bestellformular eingegebenen
-                Informationen werden zunächst nur lokal im
-                Browser zur Erstellung der Bestellanfrage
-                verwendet.
+                Informationen werden zur Bearbeitung der
+                Bestellanfrage an das ENGINX-Bestellsystem
+                übermittelt.
+
             </p>
 
+
             <p style="margin-top:15px">
+
                 Vor einem echten Verkaufsstart sollte dieser
                 Abschnitt zusammen mit einem Elternteil bzw.
                 einer rechtlich geeigneten Stelle vollständig
                 geprüft und angepasst werden.
+
             </p>
 
         `;
 
     }
 
-    document.getElementById("legalOverlay")
-        .classList.add("active");
+
+    document
+        .getElementById("legalOverlay")
+        .classList
+        .add("active");
+
 }
 
 
-/* =========================
-   HILFSFUNKTIONEN
-========================= */
+
+/* ========================================
+   MODAL SCHLIESSEN
+======================================== */
 
 function closeModal(id){
 
-    document.getElementById(id)
-        .classList.remove("active");
+    document
+        .getElementById(id)
+        .classList
+        .remove("active");
 
 }
 
+
+
+/* ========================================
+   AUSSERHALB KLICKEN
+======================================== */
 
 function outsideClose(event,id){
 
@@ -1586,19 +2279,50 @@ function outsideClose(event,id){
 }
 
 
+
+/* ========================================
+   PREIS FORMATIEREN
+======================================== */
+
 function formatPrice(value){
 
-    return value.toLocaleString("de-DE",{
-        style:"currency",
-        currency:"EUR"
-    });
+    return Number(value || 0)
+        .toLocaleString(
+            "de-DE",
+            {
+                style:"currency",
+                currency:"EUR"
+            }
+        );
 
 }
 
 
-/* START */
+
+/* ========================================
+   HTML ABSICHERN
+======================================== */
+
+function escapeHtml(value){
+
+    return String(value ?? "")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+
+
+/* ========================================
+   START
+======================================== */
 
 loadProducts();
+
+updateCart();
 
 </script>
 
