@@ -1,0 +1,853 @@
+```html
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ENGINX Admin</title>
+
+<style>
+:root{
+    --bg:#07090d;
+    --card:#111720;
+    --card2:#151c26;
+    --text:#f4f7fb;
+    --muted:#8993a3;
+    --line:#222b38;
+    --accent:#7c5cff;
+    --accent2:#5b8cff;
+    --green:#35d39a;
+    --danger:#ff6262;
+}
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    background:
+        radial-gradient(circle at 80% 0%,rgba(124,92,255,.16),transparent 30%),
+        #07090d;
+    color:var(--text);
+    min-height:100vh;
+}
+
+button,
+input,
+textarea,
+select{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+.page{
+    width:min(1050px,100%);
+    margin:auto;
+    padding:45px 22px 80px;
+}
+
+.top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:35px;
+}
+
+.logo{
+    font-size:22px;
+    font-weight:900;
+    letter-spacing:3px;
+}
+
+.logo span{
+    color:var(--accent);
+}
+
+.back{
+    color:var(--muted);
+    text-decoration:none;
+    font-size:14px;
+}
+
+.back:hover{
+    color:white;
+}
+
+.login{
+    width:min(430px,100%);
+    margin:90px auto;
+    padding:30px;
+    background:rgba(17,23,32,.9);
+    border:1px solid var(--line);
+    border-radius:24px;
+}
+
+.login h1{
+    font-size:28px;
+    margin-bottom:8px;
+}
+
+.muted{
+    color:var(--muted);
+    font-size:14px;
+    line-height:1.6;
+}
+
+input,
+textarea,
+select{
+    width:100%;
+    background:#0e141c;
+    color:white;
+    border:1px solid var(--line);
+    border-radius:13px;
+    padding:14px;
+    outline:none;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+    border-color:var(--accent);
+}
+
+textarea{
+    min-height:150px;
+    resize:vertical;
+}
+
+label{
+    display:block;
+    font-size:13px;
+    font-weight:800;
+    margin:20px 0 8px;
+}
+
+.primary{
+    width:100%;
+    border:0;
+    color:white;
+    font-weight:800;
+    padding:14px 18px;
+    border-radius:13px;
+    background:linear-gradient(135deg,var(--accent),var(--accent2));
+    box-shadow:0 12px 35px rgba(124,92,255,.2);
+}
+
+.admin{
+    display:none;
+}
+
+.header{
+    margin-bottom:25px;
+}
+
+.header h1{
+    font-size:38px;
+    letter-spacing:-1.5px;
+    margin-bottom:8px;
+}
+
+.card{
+    background:linear-gradient(145deg,#121923,#0e141c);
+    border:1px solid var(--line);
+    border-radius:22px;
+    padding:25px;
+    margin-bottom:20px;
+}
+
+.card h2{
+    font-size:20px;
+    margin-bottom:7px;
+}
+
+.importRow{
+    display:grid;
+    grid-template-columns:1fr 160px;
+    gap:10px;
+    margin-top:20px;
+}
+
+.preview{
+    display:none;
+    margin-top:25px;
+    border-top:1px solid var(--line);
+    padding-top:25px;
+}
+
+.previewGrid{
+    display:grid;
+    grid-template-columns:260px 1fr;
+    gap:25px;
+}
+
+.previewImage{
+    width:100%;
+    height:260px;
+    object-fit:cover;
+    border-radius:18px;
+    background:#090d13;
+    border:1px solid var(--line);
+}
+
+.previewInfo h3{
+    font-size:25px;
+    margin-bottom:8px;
+}
+
+.previewDescription{
+    color:var(--muted);
+    line-height:1.6;
+    font-size:14px;
+}
+
+.row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+.status{
+    margin-top:15px;
+    padding:12px 14px;
+    border-radius:12px;
+    display:none;
+    font-size:13px;
+}
+
+.status.show{
+    display:block;
+}
+
+.status.success{
+    background:rgba(53,211,154,.08);
+    border:1px solid rgba(53,211,154,.2);
+    color:#9ce9ca;
+}
+
+.status.error{
+    background:rgba(255,98,98,.08);
+    border:1px solid rgba(255,98,98,.2);
+    color:#ffaaaa;
+}
+
+.logout{
+    border:1px solid var(--line);
+    background:#111720;
+    color:white;
+    border-radius:11px;
+    padding:10px 14px;
+}
+
+@media(max-width:700px){
+
+    .importRow,
+    .previewGrid,
+    .row{
+        grid-template-columns:1fr;
+    }
+
+    .header h1{
+        font-size:30px;
+    }
+
+}
+</style>
+</head>
+
+<body>
+
+<div id="loginScreen" class="login">
+
+    <div class="logo">
+        ENGIN<span>X</span>
+    </div>
+
+    <h1 style="margin-top:25px;">
+        Admin-Bereich
+    </h1>
+
+    <p class="muted">
+        Melde dich an, um Produkte zu verwalten.
+    </p>
+
+    <label>Passwort</label>
+
+    <input
+        id="password"
+        type="password"
+        placeholder="Admin-Passwort"
+        onkeydown="if(event.key==='Enter') login()"
+    >
+
+    <button
+        class="primary"
+        style="margin-top:18px"
+        onclick="login()"
+    >
+        Anmelden
+    </button>
+
+    <div id="loginStatus" class="status"></div>
+
+</div>
+
+
+<div id="adminScreen" class="admin">
+
+    <div class="page">
+
+        <div class="top">
+
+            <div class="logo">
+                ENGIN<span>X</span>
+            </div>
+
+            <div style="display:flex;gap:15px;align-items:center">
+
+                <a class="back" href="index.html">
+                    ← Zum Shop
+                </a>
+
+                <button class="logout" onclick="logout()">
+                    Abmelden
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="header">
+
+            <h1>Produkte verwalten</h1>
+
+            <p class="muted">
+                Importiere ein MakerWorld-Produkt und passe
+                anschließend deine Shop-Daten an.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h2>MakerWorld-Produkt importieren</h2>
+
+            <p class="muted">
+                Füge den Link zu deinem MakerWorld-Modell ein.
+                Titel, Bild und Beschreibung werden automatisch übernommen.
+            </p>
+
+            <div class="importRow">
+
+                <input
+                    id="makerworldUrl"
+                    type="url"
+                    placeholder="https://makerworld.com/..."
+                >
+
+                <button
+                    class="primary"
+                    onclick="importProduct()"
+                >
+                    Importieren
+                </button>
+
+            </div>
+
+            <div id="importStatus" class="status"></div>
+
+
+            <div id="preview" class="preview">
+
+                <div class="previewGrid">
+
+                    <img
+                        id="previewImage"
+                        class="previewImage"
+                        src=""
+                        alt="Produktbild"
+                    >
+
+                    <div class="previewInfo">
+
+                        <h3 id="previewTitle">
+                            Produkt
+                        </h3>
+
+                        <p
+                            id="previewDescription"
+                            class="previewDescription"
+                        ></p>
+
+                    </div>
+
+                </div>
+
+
+                <label>Produktname</label>
+
+                <input id="productName">
+
+
+                <label>Beschreibung</label>
+
+                <textarea id="productDescription"></textarea>
+
+
+                <div class="row">
+
+                    <div>
+
+                        <label>Preis</label>
+
+                        <input
+                            id="productPrice"
+                            type="number"
+                            min="0"
+                            step="0.01"
+                            placeholder="7.99"
+                        >
+
+                    </div>
+
+
+                    <div>
+
+                        <label>Kategorie</label>
+
+                        <select id="productCategory">
+
+                            <option value="allgemein">
+                                Allgemein
+                            </option>
+
+                            <option value="flexi">
+                                Flexi
+                            </option>
+
+                            <option value="tier">
+                                Tiere
+                            </option>
+
+                            <option value="technik">
+                                Technik
+                            </option>
+
+                            <option value="schreibtisch">
+                                Schreibtisch
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    class="primary"
+                    style="margin-top:25px"
+                    onclick="saveProduct()"
+                >
+                    Produkt veröffentlichen
+                </button>
+
+                <div id="saveStatus" class="status"></div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+const GOOGLE_SCRIPT_URL =
+    "https://script.google.com/macros/s/AKfycbzOCmurVgCq8NG3Vn0XqXB1Bo1pebR7Z31dsFHA-pQ0HnyP4AD65D_974_Y5ax11udlGg/exec";
+
+
+let adminPassword = "";
+let importedProduct = null;
+
+
+// =========================
+// LOGIN
+// =========================
+
+async function login(){
+
+    const password =
+        document.getElementById("password").value;
+
+    if(!password){
+
+        showStatus(
+            "loginStatus",
+            "Bitte Passwort eingeben.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    try{
+
+        const response =
+            await sendData({
+                action:"login",
+                password:password
+            });
+
+
+        if(response.success){
+
+            adminPassword = password;
+
+            sessionStorage.setItem(
+                "enginx_admin",
+                password
+            );
+
+            document.getElementById("loginScreen")
+                .style.display = "none";
+
+            document.getElementById("adminScreen")
+                .style.display = "block";
+
+        }else{
+
+            showStatus(
+                "loginStatus",
+                "Falsches Passwort.",
+                "error"
+            );
+
+        }
+
+    }catch(error){
+
+        showStatus(
+            "loginStatus",
+            "Verbindung zum Server fehlgeschlagen.",
+            "error"
+        );
+
+    }
+
+}
+
+
+// =========================
+// MAKERWORLD IMPORT
+// =========================
+
+async function importProduct(){
+
+    const url =
+        document.getElementById("makerworldUrl")
+            .value
+            .trim();
+
+
+    if(!url){
+
+        showStatus(
+            "importStatus",
+            "Bitte einen MakerWorld-Link eingeben.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    showStatus(
+        "importStatus",
+        "Produkt wird importiert...",
+        "success"
+    );
+
+
+    try{
+
+        const response =
+            await sendData({
+
+                action:"importMakerWorld",
+
+                password:adminPassword,
+
+                url:url
+
+            });
+
+
+        if(!response.success){
+
+            showStatus(
+                "importStatus",
+                response.error ||
+                "Import fehlgeschlagen.",
+                "error"
+            );
+
+            return;
+        }
+
+
+        importedProduct =
+            response.product;
+
+
+        document.getElementById("preview")
+            .style.display = "block";
+
+
+        document.getElementById("previewImage")
+            .src =
+            importedProduct.image;
+
+
+        document.getElementById("previewTitle")
+            .textContent =
+            importedProduct.title;
+
+
+        document.getElementById("previewDescription")
+            .textContent =
+            importedProduct.description;
+
+
+        document.getElementById("productName")
+            .value =
+            importedProduct.title;
+
+
+        document.getElementById("productDescription")
+            .value =
+            importedProduct.description;
+
+
+        showStatus(
+            "importStatus",
+            "Produkt erfolgreich importiert.",
+            "success"
+        );
+
+    }catch(error){
+
+        console.error(error);
+
+        showStatus(
+            "importStatus",
+            "Import konnte nicht durchgeführt werden.",
+            "error"
+        );
+
+    }
+
+}
+
+
+// =========================
+// PRODUKT SPEICHERN
+// =========================
+
+async function saveProduct(){
+
+    if(!importedProduct){
+
+        showStatus(
+            "saveStatus",
+            "Bitte zuerst ein Produkt importieren.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    const name =
+        document.getElementById("productName")
+            .value
+            .trim();
+
+
+    const description =
+        document.getElementById("productDescription")
+            .value
+            .trim();
+
+
+    const price =
+        document.getElementById("productPrice")
+            .value;
+
+
+    const category =
+        document.getElementById("productCategory")
+            .value;
+
+
+    if(!name || !price){
+
+        showStatus(
+            "saveStatus",
+            "Bitte Produktname und Preis ausfüllen.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    try{
+
+        const response =
+            await sendData({
+
+                action:"saveProduct",
+
+                password:adminPassword,
+
+                name:name,
+
+                image:importedProduct.image,
+
+                description:description,
+
+                price:Number(price),
+
+                category:category,
+
+                makerworldUrl:
+                    importedProduct.makerworldUrl
+
+            });
+
+
+        if(response.success){
+
+            showStatus(
+                "saveStatus",
+                "Produkt erfolgreich veröffentlicht.",
+                "success"
+            );
+
+        }else{
+
+            showStatus(
+                "saveStatus",
+                response.error ||
+                "Produkt konnte nicht gespeichert werden.",
+                "error"
+            );
+
+        }
+
+    }catch(error){
+
+        console.error(error);
+
+        showStatus(
+            "saveStatus",
+            "Verbindung zum Server fehlgeschlagen.",
+            "error"
+        );
+
+    }
+
+}
+
+
+// =========================
+// DATEN SENDEN
+// =========================
+
+async function sendData(data){
+
+    const response =
+        await fetch(
+            GOOGLE_SCRIPT_URL,
+            {
+                method:"POST",
+                body:JSON.stringify(data)
+            }
+        );
+
+
+    return await response.json();
+
+}
+
+
+// =========================
+// STATUS
+// =========================
+
+function showStatus(id,text,type){
+
+    const element =
+        document.getElementById(id);
+
+    element.textContent = text;
+
+    element.className =
+        "status show " + type;
+
+}
+
+
+// =========================
+// LOGOUT
+// =========================
+
+function logout(){
+
+    sessionStorage.removeItem("enginx_admin");
+
+    adminPassword = "";
+
+    location.reload();
+
+}
+
+
+// =========================
+// SESSION
+// =========================
+
+const savedPassword =
+    sessionStorage.getItem("enginx_admin");
+
+
+if(savedPassword){
+
+    adminPassword = savedPassword;
+
+    document.getElementById("loginScreen")
+        .style.display = "none";
+
+    document.getElementById("adminScreen")
+        .style.display = "block";
+
+}
+
+</script>
+
+</body>
+</html>
+```
