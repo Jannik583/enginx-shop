@@ -1025,46 +1025,55 @@ footer{
    PRODUKTE
 ========================= */
 
-const products = [
+let products = [];
 
-    {
-        id:1,
-        name:"Flexi Snake",
-        emoji:"🐍",
-        price:7.99,
-        category:["flexi","tier"],
-        description:"Eine bewegliche Flexi-Schlange mit vielen einzelnen Segmenten. Ideal als kleines Schreibtisch- oder Spielzeug."
-    },
+function loadProducts() {
 
-    {
-        id:2,
-        name:"Cute Axolotl",
-        emoji:"🦎",
-        price:8.99,
-        category:["tier"],
-        description:"Ein kleines bewegliches Axolotl-Modell mit einem besonderen Look. Perfekt für Schreibtisch, Regal oder als Geschenk."
-    },
+    const callbackName =
+        "enginxProducts_" + Date.now();
 
-    {
-        id:3,
-        name:"Flexi Octopus",
-        emoji:"🐙",
-        price:8.99,
-        category:["flexi","tier"],
-        description:"Eine bewegliche Flexi-Krake mit mehreren beweglichen Armen."
-    },
+    window[callbackName] = function(data) {
 
-    {
-        id:4,
-        name:"Flexi Lizard",
-        emoji:"🦎",
-        price:7.99,
-        category:["flexi","tier"],
-        description:"Eine bewegliche 3D-gedruckte Eidechse mit vielen Gelenken."
-    }
+        products = data || [];
 
-];
+        delete window[callbackName];
 
+        const script =
+            document.getElementById(callbackName);
+
+        if (script) {
+            script.remove();
+        }
+
+        renderProducts();
+        updateCart();
+    };
+
+
+    const script =
+        document.createElement("script");
+
+    script.id = callbackName;
+
+    script.src =
+        "https://script.google.com/macros/s/AKfycbzOCmurVgCq8NG3Vn0XqXB1Bo1pebR7Z31dsFHA-pQ0HnyP4AD65D_974_Y5ax11udlGg/exec" +
+        "?action=getProducts" +
+        "&callback=" + callbackName;
+
+    script.onerror = function() {
+
+        console.error(
+            "ENGINX: Produkte konnten nicht geladen werden."
+        );
+
+        delete window[callbackName];
+
+        script.remove();
+    };
+
+    document.body.appendChild(script);
+}
+    
 let cart = [];
 let currentProduct = null;
 
@@ -1583,8 +1592,7 @@ function formatPrice(value){
 
 /* START */
 
-renderProducts();
-updateCart();
+loadProducts();
 
 </script>
 
